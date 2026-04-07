@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTNW3</title>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body, html {
+    height:100%;
+    overflow:hidden;
+    background:black;
+    font-family:Arial, sans-serif;
+}
+
+/* 🎬 Cinematic Video */
+video {
+    position: fixed;
+    top:50%;
+    left:50%;
+    min-width:110%;
+    min-height:110%;
+    transform:translate(-50%, -50%) scale(1.05);
+    object-fit:cover;
+    z-index:-2;
+    animation: slowZoom 20s ease-in-out infinite alternate;
+}
+
+/* Dark overlay */
+.overlay {
+    position:fixed;
+    width:100%;
+    height:100%;
+    background: radial-gradient(circle, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
+    z-index:-1;
+}
+
+/* Logo */
+.logo {
+    position:absolute;
+    top:30px;
+    left:50%;
+    transform:translateX(-50%);
+    width:420px;
+    max-width:80%;
+    filter: drop-shadow(0 0 20px orange);
+    animation: glow 3s ease-in-out infinite alternate;
+    transition: transform 0.2s ease;
+}
+
+/* Contact Button */
+.contact {
+    position:absolute;
+    bottom:25px;
+    right:25px;
+    width:65px;
+    height:65px;
+    background:rgba(0,0,0,0.6);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    animation:pulse 2s infinite;
+}
+
+.contact:hover {
+    transform: scale(1.2);
+}
+
+.contact::after {
+    content:"Contact Us";
+    position:absolute;
+    bottom:75px;
+    right:0;
+    background:rgba(0,0,0,0.85);
+    color:white;
+    padding:6px 10px;
+    border-radius:5px;
+    font-size:12px;
+    opacity:0;
+    transition:0.3s;
+}
+
+.contact:hover::after {
+    opacity:1;
+}
+
+.contact svg {
+    width:30px;
+    fill:white;
+}
+
+/* Modal */
+.modal {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.85);
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-content {
+    background:#111;
+    padding:25px;
+    border-radius:10px;
+    width:320px;
+    color:white;
+    box-shadow:0 0 25px orange;
+    animation:fadeIn 0.4s;
+}
+
+.modal input, .modal textarea {
+    width:100%;
+    margin:10px 0;
+    padding:10px;
+    background:#222;
+    border:none;
+    color:white;
+}
+
+.modal button {
+    width:100%;
+    padding:10px;
+    background:orange;
+    border:none;
+    cursor:pointer;
+}
+
+/* Animations */
+@keyframes slowZoom {
+    from { transform:translate(-50%, -50%) scale(1.05); }
+    to { transform:translate(-50%, -50%) scale(1.15); }
+}
+
+@keyframes glow {
+    from { filter: drop-shadow(0 0 10px orange); }
+    to { filter: drop-shadow(0 0 30px red); }
+}
+
+@keyframes pulse {
+    0% { box-shadow:0 0 0 0 rgba(255,255,255,0.4); }
+    70% { box-shadow:0 0 0 15px rgba(255,255,255,0); }
+    100% { box-shadow:0 0 0 0 rgba(255,255,255,0); }
+}
+
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<video autoplay muted loop playsinline>
+    <source src="bg.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<img src="logo.png" class="logo" id="logo">
+
+<div class="contact" onclick="openModal()">
+<svg viewBox="0 0 24 24">
+<path d="M2 4h20v16H2V4zm10 7L3 6h18l-9 5zm0 2l9-5v10H3V8l9 5z"/>
+</svg>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3>Contact</h3>
+<input type="text" id="name" placeholder="Name">
+<input type="email" id="email" placeholder="Email">
+<textarea id="message" placeholder="Message"></textarea>
+<button onclick="submitForm()">Send</button>
+</div>
+</div>
+
+<script>
+// 🎯 Parallax
+document.addEventListener("mousemove", e => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 10;
+    const y = (e.clientY / window.innerHeight - 0.5) * 10;
+
+    document.getElementById("logo").style.transform =
+        `translateX(-50%) translate(${x}px, ${y}px)`;
+});
+
+// Modal controls
+function openModal() {
+    document.getElementById("modal").style.display = "flex";
+}
+
+window.onclick = function(e) {
+    if (e.target.id === "modal") {
+        document.getElementById("modal").style.display = "none";
+    }
+}
+
+// 🚀 Submit (placeholder)
+async function submitForm() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    alert("Hook this to Supabase + Resend");
+
+    // We'll wire this next step
+}
+</script>
+
+</body>
+</html>
