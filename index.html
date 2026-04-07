@@ -26,7 +26,7 @@ video {
     z-index: 0;
 }
 
-/* Dark overlay */
+/* Overlay */
 .overlay {
     position: fixed;
     width: 100%;
@@ -35,38 +35,28 @@ video {
     z-index: 1;
 }
 
-/* Logo */
+/* 🔥 Logo (bottom center + fade-in) */
 .logo {
     position: absolute;
     bottom: 60px;
     left: 50%;
-    transform: translateX(-50%) scale(0.95);
+    transform: translateX(-50%) scale(0.9);
     width: 420px;
     max-width: 85%;
     z-index: 2;
     filter: drop-shadow(0 0 30px orange);
 
     opacity: 0;
-    animation: logoFade 1.8s ease-out forwards;
+    animation: logoFade 1.8s ease-out 0.5s forwards;
 }
 
-/* ✨ Animation */
 @keyframes logoFade {
-    0% {
-        opacity: 0;
-        transform: translateX(-50%) scale(0.85);
-    }
-    60% {
-        opacity: 1;
-        transform: translateX(-50%) scale(1.03);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(-50%) scale(1);
-    }
+    0% { opacity: 0; transform: translateX(-50%) scale(0.8); }
+    60% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1); }
 }
 
-/* Contact button */
+/* ✉️ Contact Button */
 .contact {
     position: absolute;
     bottom: 25px;
@@ -82,20 +72,31 @@ video {
     cursor: pointer;
     animation: pulse 2s infinite;
     z-index: 3;
+    transition: transform 0.2s ease;
+}
+
+.contact:hover {
+    transform: scale(1.1);
 }
 
 .contact svg {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     fill: none;
     stroke: #ff9900;
-    stroke-width: 1;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.contact:hover svg {
+    filter: drop-shadow(0 0 6px orange);
 }
 
 @keyframes pulse {
-    0% { box-shadow: 0 0 10px rgba(255,140,0,0.5); }
-    50% { box-shadow: 0 0 25px rgba(255,140,0,1); }
-    100% { box-shadow: 0 0 10px rgba(255,140,0,0.5); }
+    0% { box-shadow: 0 0 10px rgba(255,140,0,0.4); }
+    50% { box-shadow: 0 0 25px rgba(255,140,0,0.9); }
+    100% { box-shadow: 0 0 10px rgba(255,140,0,0.4); }
 }
 
 /* Modal */
@@ -134,8 +135,12 @@ video {
     padding: 12px;
     border-radius: 8px;
     border: none;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.08);
     color: white;
+}
+
+.modal-content textarea {
+    height: 100px;
 }
 
 .modal-content button {
@@ -172,9 +177,7 @@ video {
 <!-- Contact Button -->
 <div class="contact" onclick="openModal()">
     <svg viewBox="0 0 24 24">
-        <path d="M3 5h18c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H3c-1.1 
-        0-2-.9-2-2V7c0-1.1.9-2 2-2zm0 2v.01L12 13 21 7.01V7H3zm18 
-        10V9l-9 6-9-6v8h18z"/>
+        <path d="M3 6h18M3 6l9 7 9-7M3 6v12h18V6"/>
     </svg>
 </div>
 
@@ -211,7 +214,6 @@ function submitForm() {
         return;
     }
 
-    // 👇 FEELS REAL (no backend yet)
     document.getElementById("modalContent").innerHTML = `
         <h3 style="color:#ffcc66;">✅ Transmission Sent</h3>
         <p style="color:#ccc;">Message received. Command will respond shortly.</p>
