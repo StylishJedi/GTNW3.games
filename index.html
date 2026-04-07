@@ -157,7 +157,7 @@ video {
 
 <body>
 
-<video autoplay muted loop playsinline>
+<video autoplay muted loop playsinline webkit-playsinline>
     <source src="bg.mp4" type="video/mp4">
 </video>
 
@@ -183,6 +183,12 @@ video {
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const video = document.querySelector("video");
+    if (video) {
+        video.play().catch(() => {});
+    }
+});
 // 🎯 Parallax
 document.addEventListener("mousemove", e => {
     const x = (e.clientX / window.innerWidth - 0.5) * 10;
