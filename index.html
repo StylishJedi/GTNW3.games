@@ -208,6 +208,17 @@ document.addEventListener("mousemove", e => {
 // Modal controls
 function openModal() {
     document.getElementById("modal").style.display = "flex";
+    <div class="modal" id="modal">
+    <div class="modal-content">
+        <h3>📡 Secure Transmission</h3>
+
+        <input type="text" id="name" placeholder="Commander Name">
+        <input type="email" id="email" placeholder="Email Address">
+        <textarea id="message" placeholder="Enter your message..."></textarea>
+
+        <button onclick="submitForm()">🚀 Send Transmission</button>
+    </div>
+</div>
 }
 
 window.onclick = function(e) {
