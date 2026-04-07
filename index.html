@@ -15,7 +15,7 @@ body, html {
     font-family:Arial, sans-serif;
 }
 
-/* 🎬 Cinematic Video */
+/* 🎬 Video */
 video {
     position: fixed;
     top: 0;
@@ -24,15 +24,14 @@ video {
     height: 100vh;
     object-fit: cover;
     z-index: 0;
-    will-change: transform;
 }
 
-/* Dark overlay */
+/* Overlay */
 .overlay {
     position:fixed;
     width:100%;
     height:100%;
-    background: radial-gradient(circle, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
+    background: radial-gradient(circle, rgba(0,0,0,0.2), rgba(0,0,0,0.85));
     z-index: 1;
 }
 
@@ -46,7 +45,6 @@ video {
     max-width:80%;
     filter: drop-shadow(0 0 20px orange);
     animation: glow 3s ease-in-out infinite alternate;
-    transition: transform 0.2s ease;
     z-index: 2;
 }
 
@@ -65,8 +63,6 @@ video {
     cursor:pointer;
     animation:pulse 2s infinite;
     z-index: 3;
-    font-size:28px;
-    color:#ffb84d;
     box-shadow: 0 0 15px rgba(255,140,0,0.6);
     transition: all 0.2s ease;
 }
@@ -76,12 +72,15 @@ video {
     box-shadow: 0 0 25px rgba(255,140,0,0.9);
 }
 
-.contact:hover {
-    transform: scale(1.2);
+.contact svg {
+    width:28px;
+    height:28px;
+    fill:#ffb84d;
 }
 
+/* Tooltip */
 .contact::after {
-    content:"Contact Us";
+    content:"Contact";
     position:absolute;
     bottom:75px;
     right:0;
@@ -98,24 +97,18 @@ video {
     opacity:1;
 }
 
-.contact svg {
-    width:30px;
-    fill:white;
-}
-
 /* Modal */
 .modal {
     position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
+    inset:0;
     background:rgba(0,0,0,0.85);
     display:none;
     align-items:center;
     justify-content:center;
+    z-index: 10;
 }
 
+/* Modal Content */
 .modal-content {
     width: 420px;
     max-width: 90%;
@@ -125,31 +118,52 @@ video {
     border: 2px solid rgba(255,165,0,0.6);
     box-shadow: 0 0 40px rgba(255,140,0,0.4);
     text-align: center;
+    animation: fadeIn 0.3s ease;
 }
 
-.modal input, .modal textarea {
+.modal-content h3 {
+    color:#ffcc66;
+    margin-bottom:15px;
+}
+
+/* Inputs */
+.modal-content input,
+.modal-content textarea {
     width:100%;
+    padding:12px;
     margin:10px 0;
-    padding:10px;
-    background:#222;
+    border-radius:8px;
     border:none;
+    background:rgba(255,255,255,0.05);
     color:white;
+    outline:none;
 }
 
-.modal button {
+.modal-content textarea {
+    height:120px;
+    resize:none;
+}
+
+/* Button */
+.modal-content button {
     width:100%;
-    padding:10px;
-    background:orange;
+    padding:14px;
+    margin-top:15px;
+    border-radius:10px;
     border:none;
+    background: linear-gradient(90deg, #ff9900, #ff6600);
+    color:black;
+    font-weight:bold;
     cursor:pointer;
+    box-shadow:0 0 20px rgba(255,140,0,0.6);
+    transition:0.2s;
+}
+
+.modal-content button:hover {
+    transform:scale(1.05);
 }
 
 /* Animations */
-@keyframes slowZoom {
-    from { transform:translate(-50%, -50%) scale(1.05); }
-    to { transform:translate(-50%, -50%) scale(1.15); }
-}
-
 @keyframes glow {
     from { filter: drop-shadow(0 0 10px orange); }
     to { filter: drop-shadow(0 0 30px red); }
@@ -170,7 +184,7 @@ video {
 
 <body>
 
-<video autoplay muted loop playsinline webkit-playsinline>
+<video autoplay muted loop playsinline>
     <source src="bg.mp4" type="video/mp4">
 </video>
 
@@ -178,38 +192,15 @@ video {
 
 <img src="logo.png" class="logo" id="logo">
 
+<!-- Contact Button -->
 <div class="contact" onclick="openModal()">
     <svg viewBox="0 0 24 24">
         <path d="M2 4h20v16H2V4zm10 7L3 6h18l-9 5zm0 2l9-5v10H3V8l9 5z"/>
     </svg>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const video = document.querySelector("video");
-    if (video) {
-        video.play().catch(() => {});
-
-        // 👇 FORCE repaint (this is the magic line)
-        video.style.opacity = "0.99";
-        setTimeout(() => {
-            video.style.opacity = "1";
-        }, 50);
-    }
-});
-// 🎯 Parallax
-document.addEventListener("mousemove", e => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 10;
-    const y = (e.clientY / window.innerHeight - 0.5) * 10;
-
-    document.getElementById("logo").style.transform =
-        `translateX(-50%) translate(${x}px, ${y}px)`;
-});
-
-// Modal controls
-function openModal() {
-    document.getElementById("modal").style.display = "flex";
-    <div class="modal" id="modal">
+<!-- Modal -->
+<div class="modal" id="modal">
     <div class="modal-content">
         <h3>📡 Secure Transmission</h3>
 
@@ -220,23 +211,42 @@ function openModal() {
         <button onclick="submitForm()">🚀 Send Transmission</button>
     </div>
 </div>
+
+<script>
+// Fix iOS video glitch
+document.addEventListener("DOMContentLoaded", () => {
+    const video = document.querySelector("video");
+    if (video) {
+        video.play().catch(() => {});
+        video.style.opacity = "0.99";
+        setTimeout(() => video.style.opacity = "1", 50);
+    }
+});
+
+// Parallax logo
+document.addEventListener("mousemove", e => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 10;
+    const y = (e.clientY / window.innerHeight - 0.5) * 10;
+    document.getElementById("logo").style.transform =
+        `translateX(-50%) translate(${x}px, ${y}px)`;
+});
+
+// Open modal
+function openModal() {
+    document.getElementById("modal").style.display = "flex";
 }
 
+// Close modal
 window.onclick = function(e) {
-    if (e.target.id === "modal") {
-        document.getElementById("modal").style.display = "none";
+    const modal = document.getElementById("modal");
+    if (e.target === modal) {
+        modal.style.display = "none";
     }
 }
 
-// 🚀 Submit (placeholder)
-async function submitForm() {
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const message = document.getElementById("message").value;
-
-    alert("Hook this to Supabase + Resend");
-
-    // We'll wire this next step
+// Placeholder submit
+function submitForm() {
+    alert("Next step: connect this to Supabase + Resend");
 }
 </script>
 
