@@ -24,6 +24,7 @@ video {
     height: 100vh;
     object-fit: cover;
     z-index: -2;
+    will-change: transform;
 }
 
 /* Dark overlay */
@@ -187,6 +188,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const video = document.querySelector("video");
     if (video) {
         video.play().catch(() => {});
+
+        // 👇 FORCE repaint (this is the magic line)
+        video.style.opacity = "0.99";
+        setTimeout(() => {
+            video.style.opacity = "1";
+        }, 50);
     }
 });
 // 🎯 Parallax
