@@ -40,12 +40,30 @@ video {
     position: absolute;
     bottom: 60px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(0.95);
     width: 420px;
     max-width: 85%;
     z-index: 2;
     filter: drop-shadow(0 0 30px orange);
-    opacity: 0.95;
+
+    opacity: 0;
+    animation: logoFade 1.8s ease-out forwards;
+}
+
+/* ✨ Animation */
+@keyframes logoFade {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.85);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.03);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
 }
 
 /* Contact button */
