@@ -6,13 +6,13 @@
 <title>GTNW3</title>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-
 body, html {
-    height:100%;
-    overflow:hidden;
-    background:black;
-    font-family:Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+    font-family: Arial, sans-serif;
 }
 
 /* 🎬 Video */
@@ -26,171 +26,126 @@ video {
     z-index: 0;
 }
 
-/* Overlay */
+/* Dark overlay */
 .overlay {
-    position:fixed;
-    width:100%;
-    height:100%;
+    position: fixed;
+    width: 100%;
+    height: 100%;
     background: radial-gradient(circle, rgba(0,0,0,0.2), rgba(0,0,0,0.85));
     z-index: 1;
 }
 
 /* Logo */
 .logo {
-    position:absolute;
-    top:30px;
-    left:50%;
-    transform:translateX(-50%);
-    width:420px;
-    max-width:80%;
-    filter: drop-shadow(0 0 20px orange);
-    animation: glow 3s ease-in-out infinite alternate;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 420px;
+    max-width: 85%;
     z-index: 2;
+    filter: drop-shadow(0 0 25px orange);
 }
 
-/* Contact Button */
+/* Contact button */
 .contact {
-    position:absolute;
-    bottom:25px;
-    right:25px;
-    width:65px;
-    height:65px;
-    background:rgba(0,0,0,0.75);
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    animation:pulse 2s infinite;
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle, #111, #000);
+    border: 2px solid rgba(255,140,0,0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: pulse 2s infinite;
     z-index: 3;
-    box-shadow: 0 0 15px rgba(255,140,0,0.6);
-    transition: all 0.2s ease;
-}
-
-.contact:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 25px rgba(255,140,0,0.9);
 }
 
 .contact svg {
-    width:28px;
-    height:28px;
-    fill:#ffb84d;
+    width: 30px;
+    fill: #ff9900;
 }
 
-/* Tooltip */
-.contact::after {
-    content:"Contact";
-    position:absolute;
-    bottom:75px;
-    right:0;
-    background:rgba(0,0,0,0.85);
-    color:white;
-    padding:6px 10px;
-    border-radius:5px;
-    font-size:12px;
-    opacity:0;
-    transition:0.3s;
-}
-
-.contact:hover::after {
-    opacity:1;
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px rgba(255,140,0,0.5); }
+    50% { box-shadow: 0 0 25px rgba(255,140,0,1); }
+    100% { box-shadow: 0 0 10px rgba(255,140,0,0.5); }
 }
 
 /* Modal */
 .modal {
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.85);
-    display:none;
-    align-items:center;
-    justify-content:center;
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
     z-index: 10;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Modal Content */
 .modal-content {
-    width: 420px;
-    max-width: 90%;
-    padding: 30px;
-    border-radius: 18px;
-    background: linear-gradient(180deg, #0a1a2f, #050d1a);
-    border: 2px solid rgba(255,165,0,0.6);
-    box-shadow: 0 0 40px rgba(255,140,0,0.4);
+    background: linear-gradient(180deg, #0b1a2a, #050d18);
+    padding: 25px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid rgba(255,140,0,0.4);
+    box-shadow: 0 0 25px rgba(255,140,0,0.4);
+    color: white;
     text-align: center;
-    animation: fadeIn 0.3s ease;
 }
 
 .modal-content h3 {
-    color:#ffcc66;
-    margin-bottom:15px;
+    margin-bottom: 20px;
+    color: #ffcc66;
 }
 
-/* Inputs */
 .modal-content input,
 .modal-content textarea {
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border-radius:8px;
-    border:none;
-    background:rgba(255,255,255,0.05);
-    color:white;
-    outline:none;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255,255,255,0.1);
+    color: white;
 }
 
-.modal-content textarea {
-    height:120px;
-    resize:none;
-}
-
-/* Button */
 .modal-content button {
-    width:100%;
-    padding:14px;
-    margin-top:15px;
-    border-radius:10px;
-    border:none;
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
     background: linear-gradient(90deg, #ff9900, #ff6600);
-    color:black;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:0 0 20px rgba(255,140,0,0.6);
-    transition:0.2s;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.modal-content button:hover {
-    transform:scale(1.05);
-}
-
-/* Animations */
-@keyframes glow {
-    from { filter: drop-shadow(0 0 10px orange); }
-    to { filter: drop-shadow(0 0 30px red); }
-}
-
-@keyframes pulse {
-    0% { box-shadow:0 0 0 0 rgba(255,255,255,0.4); }
-    70% { box-shadow:0 0 0 15px rgba(255,255,255,0); }
-    100% { box-shadow:0 0 0 0 rgba(255,255,255,0); }
-}
-
-@keyframes fadeIn {
-    from {opacity:0;}
-    to {opacity:1;}
+.close {
+    margin-top: 10px;
+    color: #aaa;
+    cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
+<!-- 🎬 Background -->
 <video autoplay muted loop playsinline>
     <source src="bg.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
 
-<img src="logo.png" class="logo" id="logo">
+<!-- Logo -->
+<img src="logo.png" class="logo">
 
 <!-- Contact Button -->
 <div class="contact" onclick="openModal()">
@@ -201,52 +156,43 @@ video {
 
 <!-- Modal -->
 <div class="modal" id="modal">
-    <div class="modal-content">
-        <h3>📡 Secure Transmission</h3>
+    <div class="modal-content" id="modalContent">
+        <h3>📡 Contact Command</h3>
 
-        <input type="text" id="name" placeholder="Commander Name">
-        <input type="email" id="email" placeholder="Email Address">
-        <textarea id="message" placeholder="Enter your message..."></textarea>
+        <input id="name" placeholder="Name">
+        <input id="email" placeholder="Email">
+        <textarea id="message" placeholder="Message"></textarea>
 
         <button onclick="submitForm()">🚀 Send Transmission</button>
+        <div class="close" onclick="closeModal()">Close</div>
     </div>
 </div>
 
 <script>
-// Fix iOS video glitch
-document.addEventListener("DOMContentLoaded", () => {
-    const video = document.querySelector("video");
-    if (video) {
-        video.play().catch(() => {});
-        video.style.opacity = "0.99";
-        setTimeout(() => video.style.opacity = "1", 50);
-    }
-});
-
-// Parallax logo
-document.addEventListener("mousemove", e => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 10;
-    const y = (e.clientY / window.innerHeight - 0.5) * 10;
-    document.getElementById("logo").style.transform =
-        `translateX(-50%) translate(${x}px, ${y}px)`;
-});
-
-// Open modal
 function openModal() {
     document.getElementById("modal").style.display = "flex";
 }
 
-// Close modal
-window.onclick = function(e) {
-    const modal = document.getElementById("modal");
-    if (e.target === modal) {
-        modal.style.display = "none";
-    }
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
 }
 
-// Placeholder submit
 function submitForm() {
-    alert("Next step: connect this to Supabase + Resend");
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    if (!name || !email || !message) {
+        alert("Fill out all fields.");
+        return;
+    }
+
+    // 👇 FEELS REAL (no backend yet)
+    document.getElementById("modalContent").innerHTML = `
+        <h3 style="color:#ffcc66;">✅ Transmission Sent</h3>
+        <p style="color:#ccc;">Message received. Command will respond shortly.</p>
+        <div class="close" onclick="closeModal()">Close</div>
+    `;
 }
 </script>
 
