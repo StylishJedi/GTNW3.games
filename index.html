@@ -23,7 +23,7 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
-/* 🎬 Background Video */
+/* 🎬 Background */
 video {
     position: fixed;
     top: 0;
@@ -67,36 +67,35 @@ video {
     filter: drop-shadow(0 0 25px orange);
 }
 
-/* fine tuning */
+/* tuning */
 .badge.old {
     transform: translateY(2px);
 }
 
-.badge.new {
-    transform: scale(1.05);
+/* clickable new badge */
+.clickable {
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
 }
 
-/* 🎯 CTA BUTTON */
-.cta {
-    padding: 14px 20px;
-    border-radius: 14px;
-    background: linear-gradient(45deg, #ff3c00, #ffcc00);
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    white-space: nowrap;
-
-    box-shadow: 0 0 20px rgba(255,120,0,0.7);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.cta:hover {
+.clickable:hover {
     transform: scale(1.08);
-    box-shadow: 0 0 35px rgba(255,150,0,1);
+    filter: drop-shadow(0 0 35px orange);
 }
 
-.cta:active {
+.clickable:active {
     transform: scale(0.96);
+}
+
+/* subtle pulse to draw attention */
+@keyframes glowPulse {
+    0% { filter: drop-shadow(0 0 15px rgba(255,140,0,0.6)); }
+    50% { filter: drop-shadow(0 0 35px rgba(255,180,0,1)); }
+    100% { filter: drop-shadow(0 0 15px rgba(255,140,0,0.6)); }
+}
+
+.badge.new {
+    animation: glowPulse 3.5s infinite;
 }
 
 /* Animation */
@@ -106,7 +105,7 @@ video {
     100% { opacity: 1; transform: translateX(-50%) scale(1); }
 }
 
-/* ✉️ Contact Button */
+/* ✉️ Contact */
 .contact {
     position: absolute;
     bottom: 25px;
@@ -139,10 +138,6 @@ video {
     stroke-linejoin: round;
 }
 
-.contact:hover svg {
-    filter: drop-shadow(0 0 6px orange);
-}
-
 @keyframes pulse {
     0% { box-shadow: 0 0 10px rgba(255,140,0,0.4); }
     50% { box-shadow: 0 0 25px rgba(255,140,0,0.9); }
@@ -171,11 +166,6 @@ video {
     box-shadow: 0 0 25px rgba(255,140,0,0.4);
     color: white;
     text-align: center;
-}
-
-.modal-content h3 {
-    margin-bottom: 20px;
-    color: #ffcc66;
 }
 
 .modal-content input,
@@ -221,16 +211,16 @@ video {
 
 <div class="overlay"></div>
 
-<!-- 🔥 Logos + CTA -->
+<!-- 🔥 Logos -->
 <div class="logo-row">
     <img src="logo.png" class="badge old">
-    <img src="logo-new.png" class="badge new">
-    <a href="https://beta.GTNW3.games" target="_blank" class="cta">
-        PLAY THE BETA
+
+    <a href="https://beta.GTNW3.games" target="_blank">
+        <img src="logo-new.png" class="badge new clickable">
     </a>
 </div>
 
-<!-- ✉️ Contact Button -->
+<!-- ✉️ Contact -->
 <div class="contact" onclick="openModal()">
     <svg viewBox="0 0 24 24">
         <path d="M3 6h18M3 6l9 7 9-7M3 6v12h18V6"/>
@@ -240,12 +230,10 @@ video {
 <!-- Modal -->
 <div class="modal" id="modal">
     <div class="modal-content" id="modalContent">
-        <h3>📡 Contact Command</h3>
-
+        <h3 style="color:#ffcc66;">📡 Contact Command</h3>
         <input id="name" placeholder="Name">
         <input id="email" placeholder="Email">
         <textarea id="message" placeholder="Message"></textarea>
-
         <button onclick="submitForm()">🚀 Send Transmission</button>
         <div class="close" onclick="closeModal()">Close</div>
     </div>
