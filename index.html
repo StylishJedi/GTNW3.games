@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8461941127569704"
-crossorigin="anonymous">
-</script>
+crossorigin="anonymous"></script>
+
 <link rel="icon" href="favicon.ico">
 <link rel="icon" type="image/png" href="favicon.png">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>GTNW3</title>
 
 <style>
@@ -20,7 +23,7 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
-/* 🎬 Video */
+/* 🎬 Background Video */
 video {
     position: fixed;
     top: 0;
@@ -40,21 +43,59 @@ video {
     z-index: 1;
 }
 
-/* 🔥 Logo (bottom center + fade-in) */
-.logo {
+/* 🔥 Logo Row */
+.logo-row {
     position: absolute;
-    bottom: 60px;
+    bottom: 70px;
     left: 50%;
-    transform: translateX(-50%) scale(0.9);
-    width: 420px;
-    max-width: 85%;
-    z-index: 2;
-    filter: drop-shadow(0 0 30px orange);
+    transform: translateX(-50%) scale(0.95);
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+
+    z-index: 2;
     opacity: 0;
     animation: logoFade 1.8s ease-out 0.5s forwards;
 }
 
+/* badges */
+.badge {
+    max-height: 110px;
+    width: auto;
+    filter: drop-shadow(0 0 25px orange);
+}
+
+/* micro adjustments */
+.badge.old {
+    transform: translateY(2px);
+}
+
+.badge.new {
+    transform: scale(1.05);
+}
+
+/* 🎯 CTA BUTTON */
+.cta {
+    padding: 14px 20px;
+    border-radius: 14px;
+    background: linear-gradient(45deg, #ff3c00, #ffcc00);
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+
+    box-shadow: 0 0 20px rgba(255,120,0,0.7);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 35px rgba(255,150,0,1);
+}
+
+/* Animation */
 @keyframes logoFade {
     0% { opacity: 0; transform: translateX(-50%) scale(0.8); }
     60% { opacity: 1; transform: translateX(-50%) scale(1.05); }
@@ -176,10 +217,14 @@ video {
 
 <div class="overlay"></div>
 
-<!-- Logo -->
-<img src="logo.png" class="logo">
+<!-- 🔥 Logos + CTA -->
+<div class="logo-row">
+    <img src="logo.png" class="badge old">
+    <img src="logo-new.png" class="badge new">
+    <a href="#" class="cta">PLAY THE BETA</a>
+</div>
 
-<!-- Contact Button -->
+<!-- ✉️ Contact Button -->
 <div class="contact" onclick="openModal()">
     <svg viewBox="0 0 24 24">
         <path d="M3 6h18M3 6l9 7 9-7M3 6v12h18V6"/>
