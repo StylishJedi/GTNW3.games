@@ -67,7 +67,7 @@ video {
     filter: drop-shadow(0 0 25px orange);
 }
 
-/* micro adjustments */
+/* fine tuning */
 .badge.old {
     transform: translateY(2px);
 }
@@ -87,12 +87,16 @@ video {
     white-space: nowrap;
 
     box-shadow: 0 0 20px rgba(255,120,0,0.7);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .cta:hover {
     transform: scale(1.08);
     box-shadow: 0 0 35px rgba(255,150,0,1);
+}
+
+.cta:active {
+    transform: scale(0.96);
 }
 
 /* Animation */
@@ -221,7 +225,9 @@ video {
 <div class="logo-row">
     <img src="logo.png" class="badge old">
     <img src="logo-new.png" class="badge new">
-    <a href="#" class="cta">PLAY THE BETA</a>
+    <a href="https://beta.GTNW3.games" target="_blank" class="cta">
+        PLAY THE BETA
+    </a>
 </div>
 
 <!-- ✉️ Contact Button -->
